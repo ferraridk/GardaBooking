@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../cubits/login_cubit.dart';
+import '../city/cities_screen.dart';
 import '../home/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -37,7 +38,7 @@ class LoginScreen extends StatelessWidget {
               onPressed: () {
                 context.read<LoginCubit>().logInWithCredentials().then((success) {
                   if (success) {
-                    Get.offAll(() => HomeScreen());
+                    Navigator.pushNamed(context, '/');
                   }
                 });
               },
