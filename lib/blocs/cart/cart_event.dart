@@ -13,6 +13,9 @@ class CartStarted extends CartEvent {
   List<Object> get props => [];
 }
 
+class GetTotalPrice extends CartEvent {}
+
+
 class CartProductAdded extends CartEvent {
   final Product product;
 

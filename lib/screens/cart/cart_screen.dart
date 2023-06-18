@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../blocs/cart/cart_bloc.dart';
+
 import '../../widgets/widgets.dart';
 
 class CartScreen extends StatefulWidget {
@@ -127,70 +128,27 @@ class _CartScreenState extends State<CartScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Datoer valgt',
+                                'Antal dage',
                                 style: Theme.of(context).textTheme.displayMedium,
                               ),
                               Text(
-                                '${fromDate != null ? DateFormat('MMM d').format(fromDate!) : '-'} - ${toDate != null ? DateFormat('MMM d').format(toDate!) : '-'}',
+                                '$numberOfDays',
                                 style: Theme.of(context).textTheme.displayMedium,
                               ),
                             ],
                           ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Antal dage',
-                            style: Theme.of(context).textTheme.displayMedium,
-                          ),
-                          Text(
-                            '$numberOfDays',
-                            style: Theme.of(context).textTheme.displayMedium,
-                          ),
-                        ],
-                      ),
-                      Stack(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.black.withAlpha(50),
-                            ),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin: const EdgeInsets.symmetric(
-                              vertical: 5,
-                              horizontal: 5,
-                            ),
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                            ),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 30),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Total Pris',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displayMedium!
-                                        .copyWith(color: Colors.white),
-                                  ),
-                                  Text(
-                                    '\Kr.${state.cart.calculateTotalPrice(fromDate, toDate)}',
-                                    style: Theme.of(context).textTheme.displayMedium!.copyWith(color: Colors.white),
-                                  ),
-                                ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Total',
+                                style: Theme.of(context).textTheme.displayMedium,
                               ),
-                            ),
+                                Text(
+                                  '\Kr.${state.cart.calculateTotalPrice(fromDate, toDate).toStringAsFixed(2)}',
+                                  style: Theme.of(context).textTheme.displayMedium,
+                                ),
+                            ],
                           ),
                         ],
                       ),

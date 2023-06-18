@@ -18,6 +18,7 @@ class CheckoutLoaded extends CheckoutState {
   final String? zipCode;
   final List<Product>? products;
   final String? total;
+  final double totalPrice;
   final Checkout checkout;
 
   CheckoutLoaded({
@@ -29,19 +30,43 @@ class CheckoutLoaded extends CheckoutState {
     this.zipCode,
     this.products,
     this.total,
+    this.totalPrice = 0.0,
   }) : checkout = Checkout(
-      fullName: fullName,
-      email: email,
-      address: address,
-      city: city,
-      country: country,
-      zipCode: zipCode,
-      products: products,
-      total: total);
-
-  double get totalPrice => double.parse(total ?? '0.0');
+    fullName: fullName,
+    email: email,
+    address: address,
+    city: city,
+    country: country,
+    zipCode: zipCode,
+    products: products,
+    total: total,
+  );
 
   @override
   List<Object?> get props =>
-      [fullName, email, address, city, country, zipCode, products, total];
+      [fullName, email, address, city, country, zipCode, products, total, totalPrice];
+
+  CheckoutLoaded copyWith({
+    String? fullName,
+    String? email,
+    String? address,
+    String? city,
+    String? country,
+    String? zipCode,
+    List<Product>? products,
+    String? total,
+    double? totalPrice,
+  }) {
+    return CheckoutLoaded(
+      fullName: fullName ?? this.fullName,
+      email: email ?? this.email,
+      address: address ?? this.address,
+      city: city ?? this.city,
+      country: country ?? this.country,
+      zipCode: zipCode ?? this.zipCode,
+      products: products ?? this.products,
+      total: total ?? this.total,
+      totalPrice: totalPrice ?? this.totalPrice,
+    );
+  }
 }

@@ -5,18 +5,18 @@ class Cart extends Equatable {
   final List<Product> products;
   final DateTime? fromDate;
   final DateTime? toDate;
+  final double totalPrice;
 
   const Cart({
     this.products = const <Product>[],
     this.fromDate,
     this.toDate,
+    this.totalPrice = 0,
   });
 
   double get total {
     return calculateTotalPrice(fromDate, toDate);
   }
-
-  String get totalString => total.toStringAsFixed(2);
 
   DateTime? get selectedFromDate {
     return fromDate;
@@ -26,9 +26,10 @@ class Cart extends Equatable {
     return toDate;
   }
 
+
   double calculateTotalPrice(DateTime? fromDate, DateTime? toDate) {
     if (fromDate != null && toDate != null) {
-      int numberOfDays = toDate.difference(fromDate).inDays;
+      int numberOfDays = calculateNumberOfDays(fromDate, toDate);
       double totalPrice = products.fold(
         0,
             (total, current) => total + (current.price * numberOfDays),
@@ -39,7 +40,11 @@ class Cart extends Equatable {
     }
   }
 
+  int calculateNumberOfDays(DateTime fromDate, DateTime toDate) {
+    return toDate.difference(fromDate).inDays;
+  }
 
+  String get totalPriceString => totalPrice.toStringAsFixed(2);
 
   @override
   List<Object?> get props => [products, fromDate, toDate];

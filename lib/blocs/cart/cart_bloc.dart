@@ -13,6 +13,7 @@ part 'cart_state.dart';
 class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc() : super(CartLoading());
 
+
   @override
   Stream<CartState> mapEventToState(CartEvent event) async* {
     if (event is CartStarted) {
@@ -28,7 +29,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     yield CartLoading();
     try {
       await Future<void>.delayed(Duration(seconds: 1));
-      yield CartLoaded();
+      final fromDate = DateTime.now();
+      final toDate = DateTime.now();
+      print('fromDate: $fromDate, toDate: $toDate');
+      yield CartLoaded(
+        cart: Cart(
+          fromDate: fromDate,
+          toDate: toDate,
+        ),
+      );
     } catch (_) {
       yield CartError();
     }

@@ -16,14 +16,15 @@ class UpdateCheckout extends CheckoutEvent {
   final String? zipCode;
   final Cart? cart;
 
-  UpdateCheckout(
-      {this.fullName,
-      this.email,
-      this.address,
-      this.city,
-      this.country,
-      this.zipCode,
-      this.cart});
+  UpdateCheckout({
+    this.fullName,
+    this.email,
+    this.address,
+    this.city,
+    this.country,
+    this.zipCode,
+    this.cart,
+  });
 
   @override
   List<Object?> get props =>
@@ -37,6 +38,13 @@ class ConfirmCheckout extends CheckoutEvent {
 
   @override
   List<Object?> get props => [checkout];
+}
 
+class SetTotalPrice extends CheckoutEvent {
+  final double totalPrice;
 
+  const SetTotalPrice({required this.totalPrice});
+
+  @override
+  List<Object?> get props => [totalPrice];
 }
